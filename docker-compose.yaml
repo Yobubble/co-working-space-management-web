@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  database:
+    container_name: mysql-server
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpassword
+      MYSQL_DATABASE: co-working-space
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - 3306:3306
