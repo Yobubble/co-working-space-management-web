@@ -1,7 +1,9 @@
+import FormContainer from "@/containers/login_page/form_container";
+
 export default function Home() {
   return (
-    <div>
-      <section>bruh</section>
-    </div>
+    <main className="w-full h-screen flex justify-center items-center">
+      <FormContainer />
+    </main>
   );
 }
