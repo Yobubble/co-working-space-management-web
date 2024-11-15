@@ -1,7 +1,11 @@
+import MembershipContainer from "@/containers/reservation_page/membership_container";
+import ReserveContainer from "@/containers/reservation_page/reserve_container";
+
 export default function ReservationPage() {
   return (
-    <div>
-      <h1>Reservation Page</h1>
-    </div>
+    <main className="w-full h-full">
+      <MembershipContainer />
+      <ReserveContainer />
+    </main>
   );
 }
