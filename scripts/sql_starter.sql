@@ -1,6 +1,10 @@
 CREATE DATABASE IF NOT EXISTS `co-working-space`;
 USE `co-working-space`;
 
+DROP TABLE IF EXISTS reservations;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS rooms;
+
 -- Create customers table
 CREATE TABLE customers (
     customer_id INT PRIMARY KEY AUTO_INCREMENT,
