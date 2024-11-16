@@ -13,7 +13,7 @@ export default function ReserveContainer() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-
+    // TODO: optimize readability and flow by migrating to use tanstack query instead
     const response = await ReserveForm(formData);
     if (response.errorMsg !== "") {
       toast({
