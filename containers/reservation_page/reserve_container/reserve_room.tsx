@@ -30,8 +30,8 @@ export default function ReserveRoom() {
       {rooms.map((val: RoomModel) => {
         return (
           <Dialog key={val.room_id}>
-            <DialogTrigger className="flex gap-2 bg-c3 m-2 p-3">
-              {val.room_id}
+            <DialogTrigger className="flex gap-2 bg-c3 m-2 p-3 text-white">
+              <h1>{val.room_id}</h1>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -40,7 +40,10 @@ export default function ReserveRoom() {
                   <h1>Room ID: {val.room_id}</h1>
                   <p>Number of Desk: {val.desk_num}</p>
                   <p>Number of Chair: {val.chair_num}</p>
-                  <Button className="bg-c3" onClick={() => handleConfirm(val)}>
+                  <Button
+                    className="bg-c2 hover:bg-c1"
+                    onClick={() => handleConfirm(val)}
+                  >
                     Confirm
                   </Button>
                 </section>

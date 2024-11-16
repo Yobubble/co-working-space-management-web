@@ -32,7 +32,9 @@ export default function ReserveContainer() {
         <Input type="date" name="end_date" />
         <Input type="number" name="num_desks" placeholder="number of desks" />
         <Input type="number" name="num_chairs" placeholder="number of chairs" />
-        <Button type="submit">Find Rooms</Button>
+        <Button type="submit" className="bg-c2 hover:bg-c1">
+          Find Rooms
+        </Button>
       </form>
       <ReserveRoom />
     </main>

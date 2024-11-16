@@ -65,7 +65,9 @@ export default function PaymentForm(props: PaymentFormProps) {
               placeholder="Account Number"
             />
             <Input type="text" name="account_name" placeholder="Account Name" />
-            <Button type="submit">Pay</Button>
+            <Button type="submit" className="bg-c2 hover:bg-c1">
+              Pay
+            </Button>
             {/* TODO: bank transfer */}
           </form>
         </TabsContent>
@@ -76,7 +78,9 @@ export default function PaymentForm(props: PaymentFormProps) {
               name="credit_card_number"
               placeholder="Credit Card Number"
             />
-            <Button type="submit">Pay</Button>
+            <Button type="submit" className="bg-c2 hover:bg-c1">
+              Pay
+            </Button>
             {/* TODO: credit card */}
           </form>
         </TabsContent>
@@ -87,7 +91,9 @@ export default function PaymentForm(props: PaymentFormProps) {
               name="truewallet_number"
               placeholder="True Wallet Number"
             />
-            <Button type="submit">Pay</Button>
+            <Button type="submit" className="bg-c2 hover:bg-c1">
+              Pay
+            </Button>
             {/* TODO: true wallet*/}
           </form>
         </TabsContent>
