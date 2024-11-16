@@ -19,7 +19,8 @@ export async function LoginForm(formData: FormData) {
     redirect("/");
   } else {
     console.log("Login Successful");
-    cookiestore.set("username", username, { maxAge: 5 * 60 });
+    // TODO: specify expiration date for cookie
+    cookiestore.set("username", username);
     redirect("/reservation");
   }
 }
