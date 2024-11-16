@@ -9,5 +9,11 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
+  if (request.nextUrl.pathname.startsWith("/payment")) {
+    const username = (await cookies()).get("username");
+    if (username === undefined) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
   return NextResponse.next();
 }

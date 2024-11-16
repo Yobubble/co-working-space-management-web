@@ -8,7 +8,7 @@ import ReserveRoom from "./reserve_room";
 import { RoomModel } from "@/utils/types/room";
 
 export default function ReserveContainer() {
-  const { changeRooms } = useRoomsStore();
+  const { updateRooms } = useRoomsStore();
   const { toast } = useToast();
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,7 +21,7 @@ export default function ReserveContainer() {
         title: response.errorMsg,
       });
     } else {
-      changeRooms(response.data as RoomModel[]);
+      updateRooms(response.data as RoomModel[]);
     }
   }
   return (
@@ -30,11 +30,9 @@ export default function ReserveContainer() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <Input type="date" name="start_date" />
         <Input type="date" name="end_date" />
-        <Input type="time" name="start_time" />
-        <Input type="time" name="end_time" />
         <Input type="number" name="num_desks" placeholder="number of desks" />
         <Input type="number" name="num_chairs" placeholder="number of chairs" />
-        <Button type="submit">Reserve</Button>
+        <Button type="submit">Find Rooms</Button>
       </form>
       <ReserveRoom />
     </main>

@@ -11,16 +11,24 @@ export async function ReserveForm(formData: FormData): Promise<ServerResponse> {
   const cookiestore = await cookies();
   const username = cookiestore.get("username");
   if (username === undefined) {
+    // TODO: return instead
     console.log("------No username found in cookies");
     return { errorMsg: "No username found in cookies", data: null };
   }
 
   const startDate = formData.get("start_date") as string;
   const endDate = formData.get("end_date") as string;
-  // const startTime = formData.get("start_time") as string;
-  // const endTime = formData.get("end_titme") as string;
   const numDesks = formData.get("num_desks") as string;
   const numChairs = formData.get("num_chairs") as string;
+
+  if (
+    startDate === "" ||
+    endDate === "" ||
+    numDesks === "" ||
+    numChairs === ""
+  ) {
+    return { errorMsg: "Fill the form", data: null };
+  }
 
   const sqlMemberCheck = "SELECT * FROM customers WHERE username = ?";
   const valuesMemberCheck = [username.value];

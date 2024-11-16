@@ -4,7 +4,6 @@ import { RoomModel } from "@/utils/types/room";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,14 +11,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { usePaymentStore } from "@/utils/stores/use_payment_store";
 import { SERVICES } from "@/utils/enums/services";
+import { useRouter } from "next/navigation";
 
 export default function ReserveRoom() {
   const { rooms } = useRoomsStore();
   const { updateService, updateData } = usePaymentStore();
+  const router = useRouter();
 
   function handleConfirm(room: RoomModel) {
     updateService(SERVICES.roomReservation);
     updateData(room);
+    router.push("/payment");
   }
 
   return (
@@ -29,26 +31,19 @@ export default function ReserveRoom() {
         return (
           <Dialog key={val.room_id}>
             <DialogTrigger className="flex gap-2 bg-c3 m-2 p-3">
-              <h2>{val.room_id}</h2>
+              {val.room_id}
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Confirm?</DialogTitle>
-                <DialogDescription>
-                  <section className="flex flex-col gap-3 justify-center items-center">
-                    <h1>Room ID: {val.room_id}</h1>
-                    <p>Number of Desk: {val.desk_num}</p>
-                    <p>Number of Chair: {val.chair_num}</p>
-                    <a href="/payment">
-                      <Button
-                        className="bg-c3"
-                        onClick={() => handleConfirm(val)}
-                      >
-                        Confirm
-                      </Button>
-                    </a>
-                  </section>
-                </DialogDescription>
+                <section className="flex flex-col gap-3 justify-center items-center">
+                  <h1>Room ID: {val.room_id}</h1>
+                  <p>Number of Desk: {val.desk_num}</p>
+                  <p>Number of Chair: {val.chair_num}</p>
+                  <Button className="bg-c3" onClick={() => handleConfirm(val)}>
+                    Confirm
+                  </Button>
+                </section>
               </DialogHeader>
             </DialogContent>
           </Dialog>

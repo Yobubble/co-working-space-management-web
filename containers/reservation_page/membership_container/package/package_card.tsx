@@ -1,17 +1,22 @@
 "use client";
-import { UseUpdateMembership } from "@/utils/hooks/use_update_membership";
 import { PackageCardProps } from "@/utils/types/package_card";
+import { usePaymentStore } from "@/utils/stores/use_payment_store";
+import { SERVICES } from "@/utils/enums/services";
+import { useRouter } from "next/navigation";
 
 export default function PackageCard(props: PackageCardProps) {
-  const { mutate } = UseUpdateMembership(props.title);
+  const { updateService, updateData } = usePaymentStore();
+  const router = useRouter();
 
   function handleClick() {
-    mutate();
+    updateService(SERVICES.membership);
+    updateData(props.title);
+    router.push("/payment");
   }
 
   return (
     <main
-      onClick={handleClick}
+      onClick={() => handleClick()}
       className="w-full h-full border-2 border-c1 rounded-xl flex flex-col justify-center items-start gap-6 cursor-pointer"
     >
       <props.icon />

@@ -37,11 +37,12 @@ export async function mysqlUpdate(sql: string, values: string[]) {
   return rows;
 }
 
-export async function mysqlDelete<Type extends RowDataPacket>(
-  sql: string,
-  values: string[],
-): Promise<Type[]> {
-  const [rows] = await connection.query<Type[]>(sql, values);
-  console.log("result: ", rows);
-  return rows;
-}
+// TODO: Implement mysqlDelete
+// export async function mysqlDelete<Type extends RowDataPacket>(
+//   sql: string,
+//   values: string[],
+// ): Promise<Type[]> {
+//   const [rows] = await connection.query<Type[]>(sql, values);
+//   console.log("result: ", rows);
+//   return rows;
+// }

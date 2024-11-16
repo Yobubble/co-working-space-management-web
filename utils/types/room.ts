@@ -8,5 +8,5 @@ export interface RoomModel extends RowDataPacket {
 
 export interface UseRoomStoreProps {
   rooms: RoomModel[];
-  changeRooms: (rooms: RoomModel[]) => void;
+  updateRooms: (rooms: RoomModel[]) => void;
 }

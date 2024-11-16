@@ -3,5 +3,5 @@ import { RoomModel, UseRoomStoreProps } from "../types/room";
 
 export const useRoomsStore = create<UseRoomStoreProps>((set) => ({
   rooms: [],
-  changeRooms: (rooms: RoomModel[]) => set(() => ({ rooms: rooms })),
+  updateRooms: (rooms: RoomModel[]) => set(() => ({ rooms: rooms })),
 }));

@@ -11,3 +11,8 @@ export interface UsePaymentStoreProps {
   updateData: (data: MEMBERSHIP | RoomModel) => void;
   updatePaymentType: (paymentType: PAYMENT_TYPES) => void;
 }
+
+export interface PaymentFormProps {
+  service: SERVICES;
+  data: MEMBERSHIP | RoomModel;
+}

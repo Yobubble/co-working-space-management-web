@@ -2,11 +2,13 @@
 
 import { cookies } from "next/headers";
 import { mysqlUpdate } from "../datasources/mysql";
+import { MEMBERSHIP } from "../enums/membership";
 
-export async function UpdateMembership(membership: string) {
+export async function UpdateMembership(membership: MEMBERSHIP) {
   const cookiestore = await cookies();
   const username = cookiestore.get("username");
   if (username === undefined) {
+    // TODO: use return instead
     console.log("------No username found in cookies");
     return;
   }
