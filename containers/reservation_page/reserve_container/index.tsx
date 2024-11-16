@@ -20,6 +20,7 @@ export default function ReserveContainer() {
         variant: "destructive",
         title: response.errorMsg,
       });
+      updateRooms([]);
     } else {
       updateRooms(response.data as RoomModel[]);
     }

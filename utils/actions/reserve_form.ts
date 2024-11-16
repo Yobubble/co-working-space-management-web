@@ -40,16 +40,55 @@ export async function ReserveForm(formData: FormData): Promise<ServerResponse> {
 
   switch (result[0].membership) {
     case MEMBERSHIP.daily:
+      if (startDate !== endDate) {
+        return {
+          errorMsg:
+            "You can reserve only 1 day with the daily membership or upgrade to a higher plan.",
+          data: null,
+        };
+      }
       break;
-    // TODO: start date and end date should be the same
+
     case MEMBERSHIP.monthly:
+      const startMonth = new Date(startDate).getMonth();
+      const endMonth = new Date(endDate).getMonth();
+      const startYear = new Date(startDate).getFullYear();
+      const endYear = new Date(endDate).getFullYear();
+
+      if (startYear !== endYear || startMonth !== endMonth) {
+        return {
+          errorMsg:
+            "Reservations for the monthly membership must stay within the same month.",
+          data: null,
+        };
+      }
       break;
-    // TODO: start date and end date should be within
+
     case MEMBERSHIP.yearly:
+      const startYearly = new Date(startDate).getFullYear();
+      const endYearly = new Date(endDate).getFullYear();
+
+      if (startYearly !== endYearly) {
+        return {
+          errorMsg:
+            "Reservations for the yearly membership must stay within the same year.",
+          data: null,
+        };
+      }
       break;
-    // TODO: start date and end date should be within
+
     case MEMBERSHIP.none:
-      return { errorMsg: "No membership found", data: null };
+      return {
+        errorMsg:
+          "No membership found. Please subscribe to a membership plan to make a reservation.",
+        data: null,
+      };
+
+    default:
+      return {
+        errorMsg: "Invalid membership type.",
+        data: null,
+      };
   }
 
   const sqlGetRooms =
