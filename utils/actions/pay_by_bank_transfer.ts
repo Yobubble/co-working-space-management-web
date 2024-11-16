@@ -10,10 +10,10 @@ export async function PayByBankTransfer(
   service: SERVICES,
   data: MEMBERSHIP | RoomModel,
 ): Promise<ServerResponse> {
-  const accNum = formData.get("account_number") as string;
-  const accName = formData.get("account_name") as string;
+  const accNum = formData.get("account_number") as string | null;
+  const accName = formData.get("account_name") as string | null;
 
-  if (accNum === "" || accName === "") {
+  if (!accNum || !accName) {
     return { errorMsg: "Fill the form", data: null };
   }
   if (service === SERVICES.membership) {

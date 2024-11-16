@@ -16,17 +16,12 @@ export async function ReserveForm(formData: FormData): Promise<ServerResponse> {
     return { errorMsg: "No username found in cookies", data: null };
   }
 
-  const startDate = formData.get("start_date") as string;
-  const endDate = formData.get("end_date") as string;
-  const numDesks = formData.get("num_desks") as string;
-  const numChairs = formData.get("num_chairs") as string;
+  const startDate = formData.get("start_date") as string | null | undefined;
+  const endDate = formData.get("end_date") as string | null | undefined;
+  const numDesks = formData.get("num_desks") as string | null | undefined;
+  const numChairs = formData.get("num_chairs") as string | null | undefined;
 
-  if (
-    startDate === "" ||
-    endDate === "" ||
-    numDesks === "" ||
-    numChairs === ""
-  ) {
+  if (!startDate || !endDate || !numDesks || !numChairs) {
     return { errorMsg: "Fill the form", data: null };
   }
 

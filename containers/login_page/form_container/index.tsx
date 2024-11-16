@@ -10,12 +10,7 @@ export default function FormContainer() {
     >
       <h1 className="text-4xl font-semibold text-c2">Login</h1>
       <section className="flex flex-col gap-3 h-full w-full">
-        <Input
-          type="text"
-          name="username"
-          placeholder="Username"
-          className="stro"
-        />
+        <Input type="text" name="username" placeholder="Username" />
         <Input type="password" name="password" placeholder="Password" />
       </section>
       <Button type="submit" className="bg-c2 hover:bg-c1">
