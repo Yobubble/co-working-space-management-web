@@ -12,11 +12,22 @@ import { SERVICES } from "@/utils/enums/services";
 import { MEMBERSHIP } from "@/utils/enums/membership";
 import { RoomModel } from "@/utils/types/room";
 import { useRoomsStore } from "@/utils/stores/use_rooms_store";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 export default function PaymentForm(props: PaymentFormProps) {
   const { toast } = useToast();
   const router = useRouter();
   const { updateRooms } = useRoomsStore();
+  const [isPaidStatus, setPaidStatus] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   async function handlePayByBankTransfer(
     event: React.FormEvent<HTMLFormElement>,
@@ -38,7 +49,8 @@ export default function PaymentForm(props: PaymentFormProps) {
       toast({
         title: "Payment Success",
       });
-      router.back();
+      setTotalPrice(response.data as number);
+      setPaidStatus(true);
     }
     updateRooms([]);
   }
@@ -98,6 +110,43 @@ export default function PaymentForm(props: PaymentFormProps) {
           </form>
         </TabsContent>
       </Tabs>
+      <Dialog open={isPaidStatus} onOpenChange={setPaidStatus}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Receipt</DialogTitle>
+          </DialogHeader>
+          {props.service === SERVICES.membership ? (
+            <section className="flex flex-col gap-2">
+              <h1 className="text-2xl font-bold">{props.data as MEMBERSHIP}</h1>
+              <h1 className="text-2xl font-bold">Total: {totalPrice}</h1>
+            </section>
+          ) : (
+            <section className="flex flex-col gap-2">
+              <h1 className="text-2xl font-bold">
+                Room ID: {(props.data as RoomModel).room_id.toString()}
+              </h1>
+              <h1 className="text-2xl font-bold">
+                Number of desk: {(props.data as RoomModel).desk_num.toString()}
+              </h1>
+              <h1 className="text-2xl font-bold">
+                Number of chair:{" "}
+                {(props.data as RoomModel).chair_num.toString()}
+              </h1>
+              <h1 className="text-2xl font-bold">Total: {totalPrice}</h1>
+            </section>
+          )}
+          <Button
+            className="bg-c2 hover:bg-c1"
+            onClick={() => {
+              setPaidStatus(false);
+              router.back();
+            }}
+          >
+            Download
+          </Button>
+        </DialogContent>
+      </Dialog>
+      )
     </main>
   );
 }

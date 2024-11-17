@@ -18,9 +18,16 @@ export async function PayByBankTransfer(
   }
   if (service === SERVICES.membership) {
     await UpdateMembership(data as MEMBERSHIP);
-    return { errorMsg: "", data: null };
+    switch (data as MEMBERSHIP) {
+      case MEMBERSHIP.daily:
+        return { errorMsg: "", data: 200 };
+      case MEMBERSHIP.monthly:
+        return { errorMsg: "", data: 350 };
+      case MEMBERSHIP.yearly:
+        return { errorMsg: "", data: 700 };
+    }
   } else {
     // TODO: payment implementation here
-    return { errorMsg: "", data: null };
+    return { errorMsg: "", data: 150 };
   }
 }
