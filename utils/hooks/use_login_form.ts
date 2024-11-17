@@ -15,7 +15,7 @@ export function UseLoginForm() {
       if (data.errorMsg) {
         toast({
           variant: "destructive",
-          title: "Login Failed",
+          title: data.errorMsg,
         });
         return;
       } else {
